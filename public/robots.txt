@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jaganwebsolutions.com/sitemap.xml
+Sitemap: https://jaganwebsolutions.netlify.app/sitemap.xml
