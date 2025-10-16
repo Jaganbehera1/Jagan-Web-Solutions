@@ -78,7 +78,7 @@ export default function Services() {
       <SEO
         title="Services"
         description="Professional web development services including custom website design, automation apps, dashboard systems, e-commerce solutions, and API development."
-        canonical="/services"
+        canonical="https://jaganwebsolutions.netlify.app/services"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">

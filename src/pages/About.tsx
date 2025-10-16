@@ -87,7 +87,7 @@ export default function About() {
       <SEO
         title="About"
         description="Learn about my journey as a web developer, skills in React, Node.js, and experience building automation systems, dashboards, and e-commerce applications."
-        canonical="/about"
+        canonical="https://jaganwebsolutions.netlify.app/about"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">

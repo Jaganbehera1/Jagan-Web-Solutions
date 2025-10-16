@@ -37,7 +37,7 @@ export default function Projects() {
       <SEO
         title="Projects"
         description="Explore my portfolio of innovative projects including IoT solutions, home automation systems, web applications, and embedded technology integrations."
-        canonical="/projects"
+        canonical="https://jaganwebsolutions.netlify.app/projects"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">

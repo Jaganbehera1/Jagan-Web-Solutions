@@ -6,6 +6,7 @@ interface SEOProps {
   keywords?: string;
   canonical?: string;
   ogImage?: string;
+  children?: React.ReactNode;
 }
 
 export default function SEO({

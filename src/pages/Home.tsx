@@ -30,10 +30,42 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Home"
+        title="Home | Jagan Web Solutions"
         description="Building powerful and intelligent web applications for businesses. Professional web development services including automation systems, business dashboards, and e-commerce solutions."
-        canonical="/"
-      />
+        canonical="https://jaganwebsolutions.netlify.app/"
+      >
+        {/* Optional SEO Enhancements */}
+        <meta
+          name="keywords"
+          content="web developer Odisha, React developer, web applications, automation systems, business dashboards, e-commerce apps"
+        />
+        {/* OpenGraph Meta Tags */}
+        <meta property="og:title" content="Jagan Web Solutions – Web Developer in Odisha" />
+        <meta
+          property="og:description"
+          content="Professional web development services including web apps, automation systems, business dashboards, and e-commerce solutions."
+        />
+        <meta property="og:image" content="https://jaganwebsolutions.netlify.app/icon-512.png" />
+        <meta property="og:url" content="https://jaganwebsolutions.netlify.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Jagan Web Solutions",
+            "image": "https://jaganwebsolutions.netlify.app/icon-512.png",
+            "url": "https://jaganwebsolutions.netlify.app/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Odisha",
+              "addressCountry": "IN"
+            },
+            "description":
+              "Professional web development services including web apps, automation systems, business dashboards, and e-commerce solutions."
+          })}
+        </script>
+      </SEO>
 
       <div className="min-h-screen">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900">
