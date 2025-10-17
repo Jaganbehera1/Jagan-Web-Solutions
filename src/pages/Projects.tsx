@@ -37,8 +37,9 @@ export default function Projects() {
     <>
       <SEO
         title="Projects"
-        description="Explore my portfolio of web development projects including restaurant automation, school management systems, e-commerce apps, and business dashboards."
-        canonical="https://jaganwebsolutions.netlify.app/projects"
+        description="Explore my portfolio of web development projects including restaurant automation, school management systems, e-commerce apps, and business dashboards built with React, Node.js, and modern technologies."
+        keywords="web development portfolio, react projects, nodejs projects, automation systems, school management system, restaurant automation, e-commerce apps"
+        canonical="/projects"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">

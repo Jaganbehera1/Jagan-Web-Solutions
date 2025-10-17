@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import {
   Globe,
   Zap,
@@ -73,13 +74,46 @@ export default function Services() {
     },
   ];
 
+  const servicesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Web Development Services',
+    provider: {
+      '@type': 'Organization',
+      name: 'Jagan Web Solutions',
+      url: 'https://jaganwebsolutions.netlify.app',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'India',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Web Development Services',
+      itemListElement: services.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: service.title,
+          description: service.description,
+        },
+      })),
+    },
+  };
+
   return (
     <>
       <SEO
         title="Services"
-        description="Professional web development services including custom website design, automation apps, dashboard systems, e-commerce solutions, and API development."
-        canonical="https://jaganwebsolutions.netlify.app/services"
+        description="Professional web development services including custom website design, automation apps, dashboard systems, e-commerce solutions, and API development. Get a free consultation today."
+        keywords="web development services, custom website design, automation systems, dashboard development, ecommerce solutions, api development, progressive web apps"
+        canonical="/services"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(servicesSchema)}
+        </script>
+      </Helmet>
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

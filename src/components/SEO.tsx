@@ -12,12 +12,12 @@ interface SEOProps {
 export default function SEO({
   title,
   description,
-  keywords = 'web development, react developer, web automation, business software, odisha developer',
+  keywords = 'web developer in odisha, web development services odisha, react developer odisha, web automation expert odisha, business software development odisha, professional web developer bhubaneswar, best web developer odisha',
   canonical,
   ogImage = '/og-image.jpg',
 }: SEOProps) {
-  const fullTitle = `${title} | Jagan Web Solutions`;
-  const siteUrl = 'https://jaganwebsolutions.com';
+  const fullTitle = `${title} | Jagan Web Solutions - Professional Web Developer in Odisha`;
+  const siteUrl = 'https://jaganwebsolutions.netlify.app';
 
   return (
     <Helmet>

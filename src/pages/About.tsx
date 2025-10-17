@@ -85,9 +85,10 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About"
-        description="Learn about my journey as a web developer, skills in React, Node.js, and experience building automation systems, dashboards, and e-commerce applications."
-        canonical="https://jaganwebsolutions.netlify.app/about"
+        title="About - Expert Web Developer in Bhubaneswar, Odisha | IoT Specialist"
+        description="Experienced Web Developer from Odisha with 5+ years of expertise in creating powerful web solutions. Specializing in React, Node.js, IoT, and business automation systems. Serving clients across Bhubaneswar and Odisha with cutting-edge web development services."
+        keywords="web developer odisha, web developer bhubaneswar, react developer odisha, full stack developer bhubaneswar, iot specialist odisha, business automation expert odisha, best web developer bhubaneswar"
+        canonical="/about"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">

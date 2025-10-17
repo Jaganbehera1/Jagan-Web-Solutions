@@ -106,8 +106,9 @@ export default function Contact() {
     <>
       <SEO
         title="Contact"
-        description="Get in touch for web development projects, automation systems, or business software solutions. Free consultation available."
-        canonical="https://jaganwebsolutions.netlify.app/contact"
+        description="Get in touch for web development projects, automation systems, IoT solutions, or business software. Free consultation available. Based in Odisha, India."
+        keywords="contact web developer, hire developer, freelance web developer odisha, web development consultation, automation consultation"
+        canonical="/contact"
       />
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50 dark:bg-gray-900">
