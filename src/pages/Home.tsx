@@ -79,7 +79,7 @@ export default function Home() {
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
-                  href="https://wa.me/919999999999"
+                  href="https://wa.me/+917978966065"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 rounded-lg font-semibold transition-all inline-flex items-center justify-center"
