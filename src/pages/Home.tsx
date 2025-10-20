@@ -30,35 +30,13 @@ export default function Home() {
   ];
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    // Ensure video starts muted (required for autoplay on many mobile browsers)
-    try {
-      if (videoRef.current) {
-        videoRef.current.muted = true;
-        // try to play; ignore errors (will be handled by user gesture)
-        videoRef.current.play().catch(() => {});
-      }
-    } catch {
-      // ignore
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
     }
   }, []);
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    const newMuted = !isMuted;
-    try {
-      videoRef.current.muted = newMuted;
-      // If unmuting, attempt to play (user gesture triggered by clicking button)
-      if (!newMuted) {
-        videoRef.current.play().catch(() => {});
-      }
-    } catch {
-      // ignore
-    }
-    setIsMuted(newMuted);
-  };
 
   const [videoLoaded, setVideoLoaded] = useState<boolean | null>(null);
 
@@ -79,44 +57,38 @@ export default function Home() {
 
       <div className="min-h-screen">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-          {/* Background video sources with handlers */}
-          <video
-            ref={videoRef}
-            className={`absolute inset-0 w-full h-full object-cover ${videoLoaded === false ? 'hidden' : ''}`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            src={encodeURI('/videos/Grenton Smart Home system - 3D Animation.mp4')}
-            poster="/icon-512.png"
-            aria-hidden="true"
-            onLoadedData={handleVideoLoaded}
-            onError={handleVideoError}
-          />
-          
-          {/* overlay for readability */}
-          <div className={`absolute inset-0 bg-black/30 dark:bg-black/50`}></div>
-          
-          {/* single-icon mute/unmute toggle */}
-          <div className="absolute top-6 right-6 z-20">
-            <button
-              type="button"
-              onClick={toggleMute}
-              className="w-10 h-10 flex items-center justify-center bg-white/90 dark:bg-black/60 rounded-full shadow-md hover:opacity-95 transition"
-              aria-pressed={!isMuted}
-              aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-              title={isMuted ? 'Unmute' : 'Mute'}
-            >
-              <span className="text-lg">{isMuted ? '🔇' : '🔈'}</span>
-            </button>
+          {/* Video container with responsive sizing */}
+          <div className="absolute inset-0 w-full h-full">
+            <video
+              ref={videoRef}
+              className={`w-full h-full object-cover md:object-contain lg:object-cover ${
+                videoLoaded === false ? 'hidden' : ''
+              }`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              src={encodeURI('/videos/Grenton Smart Home system - 3D Animation.mp4')}
+              poster="/icon-512.png"
+              aria-hidden="true"
+              onLoadedData={handleVideoLoaded}
+              onError={handleVideoError}
+              style={{
+                objectPosition: 'center center',
+                maxHeight: '100vh',
+                width: '100%',
+              }}
+            />
           </div>
           
-          {/* visible fallback notice when video fails */}
+          {/* Overlay for readability - darker on mobile for better text contrast */}
+          <div className="absolute inset-0 bg-black/40 dark:bg-black/60 md:bg-black/30 md:dark:bg-black/50"></div>
+          
+          {/* Video load error message */}
           {videoLoaded === false && (
-            <div className="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8">
-              <div className="p-3 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-md text-sm">
-                Background video not found. Please place your MP4 at <code>/public/videos/grenton.mp4</code> or
-                update the video source in <code>src/pages/Home.tsx</code>.
+            <div className="absolute top-4 left-4 right-4 z-10">
+              <div className="p-3 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-md text-sm text-center">
+                Video loading error. Please refresh or check your connection.
               </div>
             </div>
           )}
