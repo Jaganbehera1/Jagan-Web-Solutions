@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code2, Zap, Globe, Database } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -28,6 +29,42 @@ export default function Home() {
     },
   ];
 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    // Ensure video starts muted (required for autoplay on many mobile browsers)
+    try {
+      if (videoRef.current) {
+        videoRef.current.muted = true;
+        // try to play; ignore errors (will be handled by user gesture)
+        videoRef.current.play().catch(() => {});
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    const newMuted = !isMuted;
+    try {
+      videoRef.current.muted = newMuted;
+      // If unmuting, attempt to play (user gesture triggered by clicking button)
+      if (!newMuted) {
+        videoRef.current.play().catch(() => {});
+      }
+    } catch {
+      // ignore
+    }
+    setIsMuted(newMuted);
+  };
+
+  const [videoLoaded, setVideoLoaded] = useState<boolean | null>(null);
+
+  const handleVideoLoaded = () => setVideoLoaded(true);
+  const handleVideoError = () => setVideoLoaded(false);
+
   return (
     <>
       <SEO
@@ -41,39 +78,77 @@ export default function Home() {
       <StructuredData type="website" />
 
       <div className="min-h-screen">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900">
-          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+          {/* Background video sources with handlers */}
+          <video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full object-cover ${videoLoaded === false ? 'hidden' : ''}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={encodeURI('/videos/Grenton Smart Home system - 3D Animation.mp4')}
+            poster="/icon-512.png"
+            aria-hidden="true"
+            onLoadedData={handleVideoLoaded}
+            onError={handleVideoError}
+          />
+          
+          {/* overlay for readability */}
+          <div className={`absolute inset-0 bg-black/30 dark:bg-black/50`}></div>
+          
+          {/* single-icon mute/unmute toggle */}
+          <div className="absolute top-6 right-6 z-20">
+            <button
+              type="button"
+              onClick={toggleMute}
+              className="w-10 h-10 flex items-center justify-center bg-white/90 dark:bg-black/60 rounded-full shadow-md hover:opacity-95 transition"
+              aria-pressed={!isMuted}
+              aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+              title={isMuted ? 'Unmute' : 'Mute'}
+            >
+              <span className="text-lg">{isMuted ? '🔇' : '🔈'}</span>
+            </button>
+          </div>
+          
+          {/* visible fallback notice when video fails */}
+          {videoLoaded === false && (
+            <div className="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8">
+              <div className="p-3 bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-md text-sm">
+                Background video not found. Please place your MP4 at <code>/public/videos/grenton.mp4</code> or
+                update the video source in <code>src/pages/Home.tsx</code>.
+              </div>
+            </div>
+          )}
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-8">
-                <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-8">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
                 <span>Available for New Projects</span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 dark:from-blue-400 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 via-white/80 to-white/90">
                   I Build Powerful
                 </span>
                 <br />
-                <span className="text-gray-900 dark:text-white">
-                  Web Applications
-                </span>
+                <span className="text-white">Web Applications</span>
               </h1>
 
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+              <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
                 Transforming ideas into intelligent digital solutions for businesses.
-                Web Developer • App Builder • Problem Solver
+                Web Developer 2025 App Builder 2025 Problem Solver
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/projects"
-                  className="group px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center"
+                  className="group px-8 py-4 bg-white/90 hover:bg-white text-black rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center"
                 >
                   View My Work
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -82,7 +157,7 @@ export default function Home() {
                   href="https://wa.me/+917978966065"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 rounded-lg font-semibold transition-all inline-flex items-center justify-center"
+                  className="px-8 py-4 bg-white/10 text-white border-2 border-white/20 hover:border-white rounded-lg font-semibold transition-all inline-flex items-center justify-center"
                 >
                   Hire Me
                 </a>
