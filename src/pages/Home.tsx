@@ -73,7 +73,7 @@ export default function Home() {
             style={{
               objectFit: 'contain',
               width: '100vw',
-              height: '100vh',
+              height: '115vh',
               background: 'black',
               position: 'absolute',
               top: 0,
