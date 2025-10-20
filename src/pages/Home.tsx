@@ -98,6 +98,16 @@ export default function Home() {
               </div>
             </div>
           )}
+          {/* Logo */}
+          <div className="absolute top-4 left-4 z-20">
+            <Link to="/" className="block">
+              <img
+                src="/icon-192.png.jpg"
+                alt="Jagan Web Solutions"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg shadow-lg bg-white/10 p-2 backdrop-blur-sm"
+              />
+            </Link>
+          </div>
         </section>
 
         {/* Hero content below video */}
