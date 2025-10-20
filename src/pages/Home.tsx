@@ -56,36 +56,40 @@ export default function Home() {
       <StructuredData type="website" />
 
       <div className="min-h-screen">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-          {/* Video container with responsive sizing */}
-          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-            <video
-              ref={videoRef}
-              className={`w-auto h-auto max-w-none ${
-                videoLoaded === false ? 'hidden' : ''
-              }`}
-              autoPlay
-              muted
-              loop
-              playsInline
-              src={encodeURI('/videos/Grenton Smart Home system - 3D Animation.mp4')}
-              poster="/icon-512.png"
-              aria-hidden="true"
-              onLoadedData={handleVideoLoaded}
-              onError={handleVideoError}
-              style={{
-                minWidth: '100%',
-                minHeight: '100%',
-                width: 'auto',
-                height: '100vh',
-                objectFit: 'contain'
-              }}
-            />
-          </div>
-            
+        {/* Fullscreen video section */}
+        <section className="relative w-screen h-screen flex items-center justify-center overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full ${videoLoaded === false ? 'hidden' : ''}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={encodeURI('/videos/Grenton Smart Home system - 3D Animation.mp4')}
+            poster="/icon-512.png"
+            aria-hidden="true"
+            onLoadedData={handleVideoLoaded}
+            onError={handleVideoError}
+            style={{
+              objectFit: 'contain',
+              width: '100vw',
+              height: '100vh',
+              background: 'black',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+          />
+          {/* Responsive object-fit: cover for desktop */}
+          <style>{`
+            @media (min-width: 640px) {
+              video.fullscreen-video {
+                object-fit: cover !important;
+              }
+            }
+          `}</style>
           {/* Overlay for readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
-            
+          <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
           {/* Video load error message */}
           {videoLoaded === false && (
             <div className="absolute top-4 left-4 right-4 z-10">
@@ -94,50 +98,51 @@ export default function Home() {
               </div>
             </div>
           )}
+        </section>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-8">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                <span>Available for New Projects</span>
-              </div>
+        {/* Hero content below video */}
+        <section className="w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-20 text-center bg-black">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm font-medium mb-8">
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+              <span>Available for New Projects</span>
+            </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 via-white/80 to-white/90">
-                  I Build Powerful
-                </span>
-                <br />
-                <span className="text-white">Web Applications</span>
-              </h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 via-white/80 to-white/90">
+                I Build Powerful
+              </span>
+              <br />
+              <span className="text-white">Web Applications</span>
+            </h1>
 
-              <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
-                Transforming ideas into intelligent digital solutions for businesses.
-                Web Developer 2025 App Builder 2025 Problem Solver
-              </p>
+            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto">
+              Transforming ideas into intelligent digital solutions for businesses.
+              Web Developer 2025 App Builder 2025 Problem Solver
+            </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/projects"
-                  className="group px-8 py-4 bg-white/90 hover:bg-white text-black rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center"
-                >
-                  View My Work
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <a
-                  href="https://wa.me/+917978966065"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-white/10 text-white border-2 border-white/20 hover:border-white rounded-lg font-semibold transition-all inline-flex items-center justify-center"
-                >
-                  Hire Me
-                </a>
-              </div>
-            </motion.div>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/projects"
+                className="group px-8 py-4 bg-white/90 hover:bg-white text-black rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl inline-flex items-center justify-center"
+              >
+                View My Work
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a
+                href="https://wa.me/+917978966065"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-white/10 text-white border-2 border-white/20 hover:border-white rounded-lg font-semibold transition-all inline-flex items-center justify-center"
+              >
+                Hire Me
+              </a>
+            </div>
+          </motion.div>
         </section>
 
         <section className="py-20 bg-white dark:bg-gray-900">
