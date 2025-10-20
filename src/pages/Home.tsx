@@ -58,10 +58,10 @@ export default function Home() {
       <div className="min-h-screen">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
           {/* Video container with responsive sizing */}
-          <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
             <video
               ref={videoRef}
-              className={`w-full h-full object-cover md:object-contain lg:object-cover ${
+              className={`w-auto h-auto max-w-none ${
                 videoLoaded === false ? 'hidden' : ''
               }`}
               autoPlay
@@ -74,16 +74,18 @@ export default function Home() {
               onLoadedData={handleVideoLoaded}
               onError={handleVideoError}
               style={{
-                objectPosition: 'center center',
-                maxHeight: '100vh',
-                width: '100%',
+                minWidth: '100%',
+                minHeight: '100%',
+                width: 'auto',
+                height: '100vh',
+                objectFit: 'contain'
               }}
             />
           </div>
-          
-          {/* Overlay for readability - darker on mobile for better text contrast */}
-          <div className="absolute inset-0 bg-black/40 dark:bg-black/60 md:bg-black/30 md:dark:bg-black/50"></div>
-          
+            
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-black/40"></div>
+            
           {/* Video load error message */}
           {videoLoaded === false && (
             <div className="absolute top-4 left-4 right-4 z-10">
